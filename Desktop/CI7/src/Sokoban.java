@@ -68,7 +68,7 @@ public class Sokoban {
 
             }
 
-//      Gan vi tri sau phi di chuyen cho player
+//      Gan vi tri sau khi thay doi toa do x va y cho player
             map[player_y][player_x] = "P";
         }
     }
