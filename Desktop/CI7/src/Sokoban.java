@@ -1,3 +1,5 @@
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -12,14 +14,27 @@ public class Sokoban {
                 {"*", "*", "*", "*"}
         };
 
+//        Khai báo một Array List chứa tất cả các tọa độ trên bản đồ
+        ArrayList<Point> positions = new ArrayList<>();
+        for (int i = 0; i<map.length; i++){
+            for(int j = 0; j<map[i].length; j++){
+                positions.add(new Point(j,i));
+            }
+        }
+
+
 //        Sinh vi tri ngau nhien cho player!
         Random rand = new Random();
         int player_x = rand.nextInt(3);
         int player_y = rand.nextInt(3);
 
 
+        System.out.println(positions);
+
 //        Chi dinh hien thi player tai vi tri da sinh
         map[player_y][player_x] = "P";
+
+
 
         while (true) {
 
