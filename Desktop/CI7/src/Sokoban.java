@@ -23,16 +23,32 @@ public class Sokoban {
         }
 
 
+
+
 //        Sinh vi tri ngau nhien cho player!
         Random rand = new Random();
-        int player_x = rand.nextInt(3);
-        int player_y = rand.nextInt(3);
+        Point point = positions.remove(rand.nextInt(positions.size()));
+        int player_x = point.x;
+        int player_y = point.y;
 
 
         System.out.println(positions);
 
 //        Chi dinh hien thi player tai vi tri da sinh
         map[player_y][player_x] = "P";
+
+        point = positions.remove(rand.nextInt(positions.size()));
+        int enemy_x = point.x;
+        int enemy_y = point.y;
+
+        map[enemy_y][enemy_x] = "E";
+
+
+        point = positions.remove(rand.nextInt(positions.size()));
+        int enemy_2_x = point.x;
+        int enemy_2_y = point.y;
+
+        map[enemy_2_y][enemy_2_x] = "E";
 
 
 
