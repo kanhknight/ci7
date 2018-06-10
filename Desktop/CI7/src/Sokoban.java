@@ -8,10 +8,16 @@ public class Sokoban {
 
 //        Khoi tao ban do
         String [][] map = {
-                {"*", "*", "*", "*"},
-                {"*", "*", "*", "*"},
-                {"*", "*", "*", "*"},
-                {"*", "*", "*", "*"}
+                {"*", "*", "*", "*", "*", "*", "*", "*", "*", "*"},
+                {"*", "*", "*", "*", "*", "*", "*", "*", "*", "*"},
+                {"*", "*", "*", "*", "*", "*", "*", "*", "*", "*"},
+                {"*", "*", "*", "*", "*", "*", "*", "*", "*", "*"},
+                {"*", "*", "*", "*", "*", "*", "*", "*", "*", "*"},
+                {"*", "*", "*", "*", "*", "*", "*", "*", "*", "*"},
+                {"*", "*", "*", "*", "*", "*", "*", "*", "*", "*"},
+                {"*", "*", "*", "*", "*", "*", "*", "*", "*", "*"},
+                {"*", "*", "*", "*", "*", "*", "*", "*", "*", "*"},
+                {"*", "*", "*", "*", "*", "*", "*", "*", "*", "*"}
         };
 
 //        Khai báo một Array List chứa tất cả các tọa độ trên bản đồ
@@ -22,9 +28,6 @@ public class Sokoban {
             }
         }
 
-
-
-
 //        Sinh vi tri ngau nhien cho player!
         Random rand = new Random();
         Point point = positions.remove(rand.nextInt(positions.size()));
@@ -32,23 +35,41 @@ public class Sokoban {
         int player_y = point.y;
 
 
-        System.out.println(positions);
-
-//        Chi dinh hien thi player tai vi tri da sinh
+//        Chi dinh hien thi player tai vi tri da random
         map[player_y][player_x] = "P";
 
+//        Xoa vi tri cua player ra khoi mang vi tri va random vi tri cho enemy trong mang da duoc remove
         point = positions.remove(rand.nextInt(positions.size()));
         int enemy_x = point.x;
         int enemy_y = point.y;
 
+//        Hien thi Enemy tai vi tri da random
         map[enemy_y][enemy_x] = "E";
 
 
+
+        // Enemy thu 2
         point = positions.remove(rand.nextInt(positions.size()));
         int enemy_2_x = point.x;
         int enemy_2_y = point.y;
 
+        // Hien thi Enemy thu 2
         map[enemy_2_y][enemy_2_x] = "E";
+
+//        Sinh tuong tren ban do
+        point = positions.remove(rand.nextInt(positions.size()));
+        int box_x = point.x;
+        int box_y = point.y;
+
+        map[box_y][box_x] = "B";
+
+
+//        Sinh vi tri qua' tren ban do
+        int gift_x = rand.nextInt(map.length);
+        int gift_y = rand.nextInt(map.length);
+
+// Hien thi qua tren ban do
+        map[gift_y][gift_x] = "G";
 
 
 
@@ -99,11 +120,42 @@ public class Sokoban {
 
             }
 
+
+//           Vẽ lại vị trí của enemy là *
+            map[enemy_y][enemy_x] = "*";
+            map[enemy_2_y][enemy_2_x] = "*";
+
+            //Kiểm tra vị trí của enemy có trùng với quà hay không? Nếu không thì hiển thị quà, nếu có thì vẽ Enemy:
+            if((enemy_x !=gift_x && enemy_y != gift_y) || (enemy_2_x !=gift_x && enemy_2_y !=gift_y)){
+                map[gift_y][gift_x] = "G";
+            }
+// Di chuyen vi tri Enemy theo chieu ngang va chieu doc
+// khong vuot ra khoi vi tri cua ban do !
+            enemy_x = (enemy_x + 1) % map.length;
+            enemy_2_y = (enemy_2_y + 1) % map[0].length;
+
+
+            //Vẽ lại vị trí của enemy là E
+            map[enemy_y][enemy_x] = "E";
+            map[enemy_2_y][enemy_2_x] = "E";
+
+            //            Kiem tra vi tri cua player va qua, neu player an qua thi thong bao chien thang, game ket thuc,
+// neu player cham enemy thi thong bao thu cuoc va ket thuc game.
+            if (player_x == gift_x && player_y == gift_y){
+                System.out.println("You Win! Cheeeeeeerrrr !");
+                break;
+            } else if ((player_x == enemy_x && player_y == enemy_y) || (player_x == enemy_2_x && player_y == enemy_2_y)){
+                System.out.println("OMG! You Losssseeeeee!");
+                break;
+            } else {
+                map[player_y][player_x] = "P";
+            }
+
 //      Gan vi tri sau khi thay doi toa do x va y cho player
-            map[player_y][player_x] = "P";
+
+
         }
     }
-
 //    Ham ve ban do
     static void printmap(String[][] map){
         for (int i =0; i < map.length; i++){
