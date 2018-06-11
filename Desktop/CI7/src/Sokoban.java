@@ -134,26 +134,34 @@ public class Sokoban {
             enemy_x = (enemy_x + 1) % map.length;
             enemy_2_y = (enemy_2_y + 1) % map[0].length;
 
+//            Enemy gặp tường thì bật lại
+            if(enemy_x==(map.length -1)){
+                enemy_x = ((enemy_x - rand.nextInt(map.length))%map.length);
+            }
 
-            //Vẽ lại vị trí của enemy là E
-            map[enemy_y][enemy_x] = "E";
-            map[enemy_2_y][enemy_2_x] = "E";
+            if(enemy_2_y ==(map[0].length -1)){
+                enemy_2_y = ((enemy_2_y - rand.nextInt(map[0].length))%map[0].length);
+            }
 
-            //            Kiem tra vi tri cua player va qua, neu player an qua thi thong bao chien thang, game ket thuc,
+//            Kiem tra vi tri cua player va qua, neu player an qua thi thong bao chien thang, game ket thuc,
 // neu player cham enemy thi thong bao thu cuoc va ket thuc game.
             if (player_x == gift_x && player_y == gift_y){
                 System.out.println("You Win! Cheeeeeeerrrr !");
                 break;
-            } else if ((player_x == enemy_x && player_y == enemy_y) || (player_x == enemy_2_x && player_y == enemy_2_y)){
-                System.out.println("OMG! You Losssseeeeee!");
-                break;
-            } else {
-                map[player_y][player_x] = "P";
             }
+            //Vẽ lại vị trí của enemy là E
+            map[enemy_y][enemy_x] = "E";
+            map[enemy_2_y][enemy_2_x] = "E";
+
+
 
 //      Gan vi tri sau khi thay doi toa do x va y cho player
+            map[player_y][player_x] = "P";
 
-
+            if ((player_x == enemy_x && player_y == enemy_y) || (player_x == enemy_2_x && player_y == enemy_2_y)){
+                System.out.println("OMG! You Losssseeeeee!");
+                break;
+            }
         }
     }
 //    Ham ve ban do
