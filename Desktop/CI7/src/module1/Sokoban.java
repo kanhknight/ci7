@@ -56,12 +56,26 @@ public class Sokoban {
         // Hien thi Enemy thu 2
         map[enemy_2_y][enemy_2_x] = "E";
 
-//        Sinh tuong tren ban do
+//        Sinh box tren ban do
         point = positions.remove(rand.nextInt(positions.size()));
         int box_x = point.x;
         int box_y = point.y;
 
         map[box_y][box_x] = "B";
+
+//        Sinh box tren ban do
+            point = positions.remove(rand.nextInt(positions.size()));
+        int box_2_x = point.x;
+        int box_2_y = point.y;
+
+        map[box_2_y][box_2_x] = "B";
+
+//        Sinh box tren ban do
+            point = positions.remove(rand.nextInt(positions.size()));
+        int box_3_x = point.x;
+        int box_3_y = point.y;
+
+        map[box_3_y][box_3_x] = "B";
 
 
 //        Sinh vi tri qua' tren ban do
@@ -149,6 +163,7 @@ public class Sokoban {
                 System.out.println("You Win! Cheeeeeeerrrr !");
                 break;
             }
+
             //Vẽ lại vị trí của enemy là E
             map[enemy_y][enemy_x] = "E";
             map[enemy_2_y][enemy_2_x] = "E";
